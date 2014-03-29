@@ -54,6 +54,11 @@ module.exports = function validateComponentJSON(component, options) {
 
   function printFilename() {
     if (!options.filename) return '';
-    console.error('    \033[90m- "\033[96m%s\033[90m"\033[0m', options.filename);
+    var filename = options.filename;
+    // remove a trailing slash just incase
+    if (filename.slice(-1) === '/') filename = filename.slice(0, -1);
+    // add /component.json just to be consistent
+    if (!/\/component\.json$/.test(filename)) filename += '/component.json';
+    console.error('    \033[90m- "\033[96m%s\033[90m"\033[0m', filename);
   }
 }

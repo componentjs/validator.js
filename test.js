@@ -1,7 +1,7 @@
 var validate = require('./');
 
 var options = {
-  filename: '/User/jong/component.json'
+  filename: __dirname
 };
 
 validate({
