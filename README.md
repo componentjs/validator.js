@@ -1,6 +1,7 @@
 # component-validator
 
-Validate a `component.json` and normalize its values if possible. This tries to be lenient by fixing any issues and logging instead of throwing, though throwing may be more appropriate.
+Validate a `component.json` and normalize its values.
+This tries to be lenient by fixing any issues and logging instead of throwing, though throwing may be more appropriate.
 
 ## API
 
@@ -9,6 +10,7 @@ Validate a `component.json` and normalize its values if possible. This tries to 
 - `json` - the contents of a `component.json`.
 - `options` - an object with the following properties:
   - `filename` - the path of the `component.json` for logging
+  - `verbose` <true> - print the log messages to `stderr`
 
 ## License
 

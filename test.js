@@ -16,6 +16,10 @@ validate({
 }, options);
 
 validate({
+  repo: 'kljasdf/kljalksjdf'
+}, options)
+
+validate({
   development: {
     'component/emitter': "1.0.0"
   }
