@@ -9,13 +9,9 @@
     "twitter": "https://twitter.com/jongleberry"
   },
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/component/validator.js.git"
-  },
-  "bugs": {
-    "mail": "me@jongleberry.com",
-    "url": "https://github.com/component/validator.js/issues"
+  "repository": "component/validator.js",
+  "dependencies": {
+    "component-consoler": "^1.0.0"
   },
   "scripts": {
     "test": "node test"

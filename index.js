@@ -1,24 +1,35 @@
 
+var warn = require('component-consoler').warn;
+
 module.exports = function validateComponentJSON(component, options) {
   options = options || {};
   var verbose = options.verbose !== false;
+  var filename = options.filename || '';
+  // remove a trailing slash just incase
+  if (filename.slice(-1) === '/') filename = filename.slice(0, -1);
+  // add /component.json just to be consistent
+  if (!/\/component\.json$/.test(filename)) filename += '/component.json';
+  if (filename) filename = '\033[35m' + filename + '\033[90m';
 
   // local components do not have to have a name
   if ('name' in component
     && !/^[a-z0-9-]+$/.test(component.name)
     && verbose) {
-    console.error('  \033[33mwarning\033[90m: "\033[31m%s\033[90m" is an invalid component name.', component.name);
-    console.error('    Component names may only contain lowercased alphanumerics and dashes.\033[0m');
-    printFilename();
+    if (filename) warn('validate', filename);
+    warn('validate', '"\033[31m' + component.name + '\033[90m" is an invalid component name.');
+    warn('validate', 'Component names may only contain lowercased alphanumerics and dashes.');
+    console.error();
   }
 
   // `repo` is changed to `repository` for consistency
   // and because abbreviations are pointless
   if (component.repo) {
     if (verbose) {
-      console.error('  \033[33mwarning\033[90m: .repo is deprecated. Use .repository instead.\033[0m');
-      printFilename();
+      if (filename) warn('validate', filename);
+      warn('validate', '.repo is deprecated. Use .repository instead.');
+      console.error();
     }
+
     component.repository = component.repo;
     delete component.repo;
   }
@@ -26,8 +37,9 @@ module.exports = function validateComponentJSON(component, options) {
   // `local` is changed to `locals` because it's an array
   if (component.local) {
     if (verbose) {
-      console.error('  \033[33mwarning\033[90m: .local is deprecated. Use .locals instead.\033[0m');
-      printFilename();
+      if (filename) warn('validate', filename);
+      warn('validate', '.local is deprecated. Use .locals instead.');
+      console.error();
     }
 
     component.locals = component.local;
@@ -40,9 +52,10 @@ module.exports = function validateComponentJSON(component, options) {
   if (Object.keys(development).length
     && ~Object.keys(development)[0].indexOf('/')) {
     if (verbose) {
-      console.error('  \033[33mwarning\033[90m: `.development`\'s signature has changed.');
-      console.error('    You probably want `.development.dependencies = {}`.');
-      printFilename();
+      if (filename) warn('validate', filename);
+      warn('validate', '.development\'s signature has changed.');
+      warn('validate', 'You probably want `.development.dependencies = {}`.');
+      console.error();
     }
 
     component.development = {
@@ -51,14 +64,4 @@ module.exports = function validateComponentJSON(component, options) {
   }
 
   return component;
-
-  function printFilename() {
-    if (!options.filename) return '';
-    var filename = options.filename;
-    // remove a trailing slash just incase
-    if (filename.slice(-1) === '/') filename = filename.slice(0, -1);
-    // add /component.json just to be consistent
-    if (!/\/component\.json$/.test(filename)) filename += '/component.json';
-    console.error('    \033[90m- "\033[96m%s\033[90m"\033[0m', filename);
-  }
 }
