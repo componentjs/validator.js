@@ -15,7 +15,7 @@ module.exports = function validateComponentJSON(component, options) {
 
   // local components do not have to have a name
   if ('name' in component
-    && !/^[a-z0-9-]+$/.test(component.name)
+    && !/^[a-z0-9-_.]+$/.test(component.name)
     && verbose) {
     if (filename) warn('validate', filename);
     warn('validate', '"\033[31m' + component.name + '\033[90m" is an invalid component name.');

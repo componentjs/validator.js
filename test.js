@@ -9,6 +9,18 @@ validate({
 }, options);
 
 validate({
+  name: 'lkjasdf.kljasdf'
+}, options);
+
+validate({
+  name: 'lkajsdf_lkjasldjkf'
+}, options);
+
+validate({
+  name: 'klasdjf-askljdf'
+}, options);
+
+validate({
   local: [
     'a',
     'b'
