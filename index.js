@@ -5,11 +5,13 @@ module.exports = function validateComponentJSON(component, options) {
   options = options || {};
   var verbose = options.verbose !== false;
   var filename = options.filename || '';
-  // remove a trailing slash just incase
-  if (filename.slice(-1) === '/') filename = filename.slice(0, -1);
-  // add /component.json just to be consistent
-  if (!/\/component\.json$/.test(filename)) filename += '/component.json';
-  if (filename) filename = '\033[35m' + filename + '\033[90m';
+  if (filename) {
+    // remove a trailing slash just incase
+    if (filename.slice(-1) === '/') filename = filename.slice(0, -1);
+    // add /component.json just to be consistent
+    if (!/\/component\.json$/.test(filename)) filename += '/component.json';
+    if (filename) filename = '\033[35m' + filename + '\033[90m';
+  }
 
   // local components do not have to have a name
   if ('name' in component
