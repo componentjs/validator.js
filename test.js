@@ -1,3 +1,4 @@
+
 var validate = require('./');
 
 var options = {
@@ -36,3 +37,41 @@ validate({
     'component/emitter': "1.0.0"
   }
 }, options);
+
+try {
+  validate({
+    scripts: {}
+  }, options);
+  throw new Error('scripts validation FAILED');
+} catch (err) {
+  console.error(err.message);
+}
+
+try {
+  validate({
+    development: []
+  }, options);
+  throw new Error('development validation FAILED');
+} catch (err) {
+  console.error(err.message);
+}
+
+try {
+  validate({
+    dependencies: []
+  }, options);
+  throw new Error('dependencies validation FAILED');
+} catch (err) {
+  console.error(err.message);
+}
+
+try {
+  validate({
+    dependencies: {
+      a: '*'
+    }
+  }, options);
+  throw new Error('dependency name validation FAILED');
+} catch (err) {
+  console.error(err.message);
+}
