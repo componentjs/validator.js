@@ -1,7 +1,7 @@
 {
   "name": "component-validator",
   "description": "validate and normalize component.jsons",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": {
     "name": "Jonathan Ong",
     "email": "me@jongleberry.com",
@@ -11,7 +11,7 @@
   "license": "MIT",
   "repository": "component/validator.js",
   "dependencies": {
-    "component-consoler": "^1.0.0"
+    "component-consoler": "^2.0.0"
   },
   "scripts": {
     "test": "node test"
